@@ -1,5 +1,5 @@
 # RDEA
-Source code for TKDD paper **Bayesian Graph Local Extrema Convolution with Long-tail Strategy for Misinformation Detection**
+Source code for TKDD paper '**[Bayesian Graph Local Extrema Convolution with Long-tail Strategy for Misinformation Detection](https://dl.acm.org/doi/full/10.1145/3639408)**'
 
 ## Usage
 Our code is based on [RDEA](https://github.com/zhenyuhe00/RDEA) and [RGCN](https://github.com/BunsenFeng/BotRGCN?tab=readme-ov-file), please refer to their usage.
