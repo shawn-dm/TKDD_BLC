@@ -156,31 +156,6 @@ class BCN(nn.Module):
         self.gc2.reset_parameters()
 
     def fit(self, features, adj, labels, idx_train, idx_val=None, train_iters=200, initialize=True, verbose=False, normalize=True, patience=500, **kwargs):
-        """Train the gcn model, when idx_val is not None, pick the best model according to the validation loss.
-
-        Parameters
-        ----------
-        features :
-            node features
-        adj :
-            the adjacency matrix. The format could be torch.tensor or scipy matrix
-        labels :
-            node labels
-        idx_train :
-            node training indices
-        idx_val :
-            node validation indices. If not given (None), GCN training process will not adpot early stopping
-        train_iters : int
-            number of training epochs
-        initialize : bool
-            whether to initialize parameters before training
-        verbose : bool
-            whether to show verbose logs
-        normalize : bool
-            whether to normalize the input adjacency matrix.
-        patience : int
-            patience for early stopping, only valid when `idx_val` is given
-        """
 
         # self.device = device
         if initialize:
@@ -312,13 +287,6 @@ class BCN(nn.Module):
         self.load_state_dict(weights)
 
     def test(self, idx_test):
-        """Evaluate GCN performance on test set.
-
-        Parameters
-        ----------
-        idx_test :
-            node testing indices
-        """
         self.eval()
         output = self.predict()
         # output = self.output
@@ -331,22 +299,6 @@ class BCN(nn.Module):
 
 
     def predict(self, features=None, adj=None):
-        """By default, the inputs should be unnormalized adjacency
-
-        Parameters
-        ----------
-        features :
-            node features. If `features` and `adj` are not given, this function will use previous stored `features` and `adj` from training to make predictions.
-        adj :
-            adjcency matrix. If `features` and `adj` are not given, this function will use previous stored `features` and `adj` from training to make predictions.
-
-
-        Returns
-        -------
-        torch.FloatTensor
-            output (log probabilities) of GCN
-        """
-
         self.eval()
         if features is None and adj is None:
             return self.forward(self.features, self.adj_norm)
