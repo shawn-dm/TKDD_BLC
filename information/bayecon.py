@@ -20,27 +20,6 @@ from copy import deepcopy
 from sklearn.metrics import f1_score
 
 class BEConv(MessagePassing):
-    r"""
-
-    .. math::
-        \mathbf{x}^{\prime}_i = \mathbf{x}_i \cdot \mathbf{\Theta}_1 +
-        \sum_{j \in \mathcal{N}(i)} e_{j,i} \cdot
-        (\mathbf{\Theta}_2 \mathbf{x}_i - \mathbf{\Theta}_3 \mathbf{x}_j)
-
-    where :math:`e_{j,i}` denotes the edge weight from source node :obj:`j` to
-    target node :obj:`i` (default: :obj:`1`)
-
-    Args:
-        in_channels (int or tuple): Size of each input sample, or :obj:`-1` to
-            derive the size from the first input(s) to the forward method.
-            A tuple corresponds to the sizes of source and target
-            dimensionalities.
-        out_channels (int): Size of each output sample.
-        bias (bool, optional): If set to :obj:`False`, the layer will
-            not learn an additive bias. (default: :obj:`True`).
-        **kwargs (optional): Additional arguments of
-            :class:`torch_geometric.nn.conv.MessagePassing`.
-    """
     def __init__(self, in_channels: Union[int, Tuple[int, int]],
                  out_channels: int, bias: bool = True, **kwargs):
         kwargs.setdefault('aggr', 'add')
